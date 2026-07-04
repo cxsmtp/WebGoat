@@ -19,7 +19,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-@ComponentScan(basePackages = {"org.owasp.webgoat.container", "org.owasp.webgoat.lessons"})
+@ComponentScan(basePackages = {"org.owasp.webgoat.container"})
 @PropertySource("classpath:application-webgoat.properties")
 @EnableAutoConfiguration
 @EnableJpaRepositories(basePackages = {"org.owasp.webgoat.container"})
