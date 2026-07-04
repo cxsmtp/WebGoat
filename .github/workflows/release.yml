@@ -3,6 +3,11 @@ on:
   push:
     tags:
       - v*
+
+# Least-privilege default; individual jobs elevate only what they need.
+permissions:
+  contents: read
+
 jobs:
   release:
     if: github.repository == 'WebGoat/WebGoat'
@@ -108,6 +113,9 @@ jobs:
     name: Update to next SNAPSHOT version
     needs: [ release ]
     runs-on: ubuntu-latest
+    permissions:
+        contents: write
+        pull-requests: write
     steps:
       - uses: actions/checkout@v7
         with:

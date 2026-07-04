@@ -5,6 +5,12 @@ on:
     types:
       - opened
 
+# Least-privilege token: the greeting job only comments on issues/PRs.
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
 jobs:
   greeting:
     if: github.repository == 'WebGoat/WebGoat'
