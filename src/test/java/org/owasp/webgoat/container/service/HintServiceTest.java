@@ -16,9 +16,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.owasp.webgoat.container.lessons.Assignment;
+import org.owasp.webgoat.container.lessons.Category;
 import org.owasp.webgoat.container.lessons.Lesson;
 import org.owasp.webgoat.container.session.Course;
-import org.owasp.webgoat.lessons.httpbasics.HttpBasics;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -27,9 +27,22 @@ public class HintServiceTest {
 
   private MockMvc mockMvc;
 
+  /** Minimal stand-in lesson so the hint service can be exercised without any concrete lesson. */
+  private static class TestLesson extends Lesson {
+    @Override
+    protected Category getDefaultCategory() {
+      return Category.GENERAL;
+    }
+
+    @Override
+    public String getTitle() {
+      return "Test Lesson";
+    }
+  }
+
   @BeforeEach
   void setup() {
-    Lesson lesson = new HttpBasics();
+    Lesson lesson = new TestLesson();
     lesson.addAssignment(
         new Assignment("test", "/HttpBasics/attack1", List.of("hint 1", "hint 2")));
     Course course = new Course(List.of(lesson));
